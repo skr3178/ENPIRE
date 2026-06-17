@@ -13,7 +13,7 @@ gym-pusht/
 reference_autoresearch/
 
 # --- Generated rollout artifacts (videos / trajectories) ---
-enpire_sim/reports/rollouts/
+enpire_sim/reports/
 *.npz
 
 # --- Heavy pulled assets (kept locally, too big for git) ---

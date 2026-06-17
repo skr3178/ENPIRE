@@ -34,23 +34,44 @@ class Policy:
     """
 
     def __init__(self, **kwargs):
-        pass
+        self._step = 0
 
     def reset(self) -> None:
-        pass
+        self._step = 0
 
     def __call__(self, obs) -> np.ndarray:
         obs = np.asarray(obs, dtype=np.float64)
         agent = obs[:2]
         block = obs[2:4]
+        theta = float(obs[4])
+        self._step += 1
 
         to_goal = GOAL_POS - block
-        dist = np.linalg.norm(to_goal)
-        direction = to_goal / dist if dist > 1e-6 else np.array([1.0, 0.0])
+        dist = float(np.linalg.norm(to_goal))
+        dn = to_goal / dist if dist > 1e-6 else np.array([1.0, 0.0])
+        ang_err = math.atan2(math.sin(GOAL_ANGLE - theta), math.cos(GOAL_ANGLE - theta))
 
-        behind = block - direction * 35.0  # staging point on the far side from goal
-        if np.linalg.norm(agent - behind) > 15.0:
-            target = behind                 # phase 1: get into pushing position
+        POS_TOL = 30.0
+        if dist > POS_TOL:
+            # TRANSLATE: get behind block (far side from goal), push through toward goal
+            behind = block - dn * 45.0
+            if np.linalg.norm(agent - behind) > 16.0:
+                target = behind
+            else:
+                target = block + dn * 18.0
         else:
-            target = block + direction * 40.0  # phase 2: push through toward goal
+            # ROTATE in place: tangential contact to spin block toward goal angle
+            radial = np.array([math.cos(theta), math.sin(theta)])
+            tang = np.array([-radial[1], radial[0]])
+            s = 1.0 if ang_err > 0 else -1.0
+            contact = block + radial * 38.0 * s
+            if np.linalg.norm(agent - contact) > 16.0:
+                target = contact
+            else:
+                target = contact - tang * s * 18.0
+
+        step = target - agent
+        sl = float(np.linalg.norm(step))
+        if sl > 18.0:
+            target = agent + step / sl * 18.0
         return np.clip(target, 0.0, 512.0).astype(np.float32)

@@ -34,23 +34,44 @@ class Policy:
     """
 
     def __init__(self, **kwargs):
-        pass
+        self.K_ANG = 100.0
+        self.R = 55.0
 
     def reset(self) -> None:
         pass
+
+    def _cost(self, block, theta):
+        pe = np.linalg.norm(GOAL_POS - block)
+        ae = abs(((theta - GOAL_ANGLE + math.pi) % (2 * math.pi)) - math.pi)
+        return pe + self.K_ANG * ae
 
     def __call__(self, obs) -> np.ndarray:
         obs = np.asarray(obs, dtype=np.float64)
         agent = obs[:2]
         block = obs[2:4]
+        theta = obs[4]
 
-        to_goal = GOAL_POS - block
-        dist = np.linalg.norm(to_goal)
-        direction = to_goal / dist if dist > 1e-6 else np.array([1.0, 0.0])
+        base = self._cost(block, theta)
+        best_c = None
+        best_d = None
+        best_score = -1e18
+        for k in range(16):
+            ang = 2 * math.pi * k / 16
+            c = block + self.R * np.array([math.cos(ang), math.sin(ang)])
+            d = block - c
+            d = d / (np.linalg.norm(d) + 1e-9)
+            nb = block + d * 10.0
+            lever = c - block
+            torque = lever[0] * d[1] - lever[1] * d[0]
+            nth = theta + 0.0008 * torque
+            score = base - self._cost(nb, nth)
+            if score > best_score:
+                best_score = score
+                best_c, best_d = c, d
 
-        behind = block - direction * 35.0  # staging point on the far side from goal
-        if np.linalg.norm(agent - behind) > 15.0:
-            target = behind                 # phase 1: get into pushing position
+        # two-phase: stage behind contact, then push through center
+        if np.linalg.norm(agent - best_c) > 12.0:
+            target = best_c
         else:
-            target = block + direction * 40.0  # phase 2: push through toward goal
+            target = block + best_d * 40.0
         return np.clip(target, 0.0, 512.0).astype(np.float32)

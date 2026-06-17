@@ -1,0 +1,511 @@
+{
+  "policy": "cem",
+  "n_episodes": 50,
+  "n_success": 48,
+  "success_rate": 0.96,
+  "mean_coverage": 0.9470867703660913,
+  "mean_steps": 159.92,
+  "total_wall_time": 6709.439551491989,
+  "episodes": [
+    {
+      "seed": 0,
+      "success": true,
+      "coverage": 0.9699946458220137,
+      "steps": 79,
+      "reward_final": 1.0,
+      "wall_time": 70.15019758599738,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 1,
+      "success": true,
+      "coverage": 0.9845024016356161,
+      "steps": 294,
+      "reward_final": 1.0,
+      "wall_time": 249.8943132889981,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 2,
+      "success": true,
+      "coverage": 0.9698085664604646,
+      "steps": 191,
+      "reward_final": 1.0,
+      "wall_time": 157.6856708230007,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 3,
+      "success": true,
+      "coverage": 0.9799985173042687,
+      "steps": 133,
+      "reward_final": 1.0,
+      "wall_time": 108.66682660399965,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 4,
+      "success": true,
+      "coverage": 0.9656675027213623,
+      "steps": 81,
+      "reward_final": 1.0,
+      "wall_time": 66.59083856500001,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 5,
+      "success": true,
+      "coverage": 0.9566691799368436,
+      "steps": 161,
+      "reward_final": 1.0,
+      "wall_time": 140.24624028499966,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 6,
+      "success": true,
+      "coverage": 0.9541121972616105,
+      "steps": 70,
+      "reward_final": 1.0,
+      "wall_time": 61.21594143599941,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 7,
+      "success": true,
+      "coverage": 0.9716887663145825,
+      "steps": 270,
+      "reward_final": 1.0,
+      "wall_time": 234.383742050999,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 8,
+      "success": true,
+      "coverage": 0.9639198965961143,
+      "steps": 154,
+      "reward_final": 1.0,
+      "wall_time": 125.24739437300013,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 9,
+      "success": true,
+      "coverage": 0.9553244887261695,
+      "steps": 151,
+      "reward_final": 1.0,
+      "wall_time": 130.12842797800113,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 10,
+      "success": true,
+      "coverage": 0.9669843293825362,
+      "steps": 228,
+      "reward_final": 1.0,
+      "wall_time": 190.1116470090019,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 11,
+      "success": true,
+      "coverage": 0.9572632644157756,
+      "steps": 244,
+      "reward_final": 1.0,
+      "wall_time": 209.13971674700224,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 12,
+      "success": true,
+      "coverage": 0.9523355817213395,
+      "steps": 211,
+      "reward_final": 1.0,
+      "wall_time": 174.38115672300046,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 13,
+      "success": true,
+      "coverage": 0.9634863565101118,
+      "steps": 105,
+      "reward_final": 1.0,
+      "wall_time": 82.42846781199842,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 14,
+      "success": true,
+      "coverage": 0.9521051317421972,
+      "steps": 211,
+      "reward_final": 1.0,
+      "wall_time": 180.5130049670006,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 15,
+      "success": true,
+      "coverage": 0.9514728968183186,
+      "steps": 223,
+      "reward_final": 1.0,
+      "wall_time": 184.16675750800277,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 16,
+      "success": true,
+      "coverage": 0.9715462943302465,
+      "steps": 152,
+      "reward_final": 1.0,
+      "wall_time": 128.6280389200001,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 17,
+      "success": true,
+      "coverage": 0.9874686659694912,
+      "steps": 166,
+      "reward_final": 1.0,
+      "wall_time": 143.17985593300182,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 18,
+      "success": true,
+      "coverage": 0.9543687670612843,
+      "steps": 121,
+      "reward_final": 1.0,
+      "wall_time": 108.01034647699998,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 19,
+      "success": true,
+      "coverage": 0.9730073487352459,
+      "steps": 150,
+      "reward_final": 1.0,
+      "wall_time": 123.87759816199832,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 20,
+      "success": false,
+      "coverage": 0.5043727682328715,
+      "steps": 300,
+      "reward_final": 0.5309187034030226,
+      "wall_time": 250.76077900900054,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 21,
+      "success": true,
+      "coverage": 0.991971436710489,
+      "steps": 79,
+      "reward_final": 1.0,
+      "wall_time": 66.76231847300005,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 22,
+      "success": true,
+      "coverage": 0.9749871322916235,
+      "steps": 36,
+      "reward_final": 1.0,
+      "wall_time": 31.514391619999515,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 23,
+      "success": true,
+      "coverage": 0.9753113901978883,
+      "steps": 152,
+      "reward_final": 1.0,
+      "wall_time": 123.02186672500102,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 24,
+      "success": true,
+      "coverage": 0.9795111767665375,
+      "steps": 127,
+      "reward_final": 1.0,
+      "wall_time": 106.49836504599807,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 25,
+      "success": true,
+      "coverage": 0.9683499094430141,
+      "steps": 81,
+      "reward_final": 1.0,
+      "wall_time": 67.16805394000039,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 26,
+      "success": true,
+      "coverage": 0.9892952146030619,
+      "steps": 110,
+      "reward_final": 1.0,
+      "wall_time": 94.0690932389989,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 27,
+      "success": true,
+      "coverage": 0.9503983684933878,
+      "steps": 282,
+      "reward_final": 1.0,
+      "wall_time": 239.048143308999,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 28,
+      "success": true,
+      "coverage": 0.9699025253192541,
+      "steps": 78,
+      "reward_final": 1.0,
+      "wall_time": 64.22454026500054,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 29,
+      "success": true,
+      "coverage": 0.9507708954750748,
+      "steps": 81,
+      "reward_final": 1.0,
+      "wall_time": 70.5228519179982,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 30,
+      "success": false,
+      "coverage": 0.4361528132938554,
+      "steps": 300,
+      "reward_final": 0.45910822451984784,
+      "wall_time": 257.645890486001,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 31,
+      "success": true,
+      "coverage": 0.9853505309831209,
+      "steps": 208,
+      "reward_final": 1.0,
+      "wall_time": 175.96984768000038,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 32,
+      "success": true,
+      "coverage": 0.977554312073094,
+      "steps": 87,
+      "reward_final": 1.0,
+      "wall_time": 72.08110703700004,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 33,
+      "success": true,
+      "coverage": 0.9836747682276797,
+      "steps": 109,
+      "reward_final": 1.0,
+      "wall_time": 91.08372363500166,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 34,
+      "success": true,
+      "coverage": 0.9634264943749759,
+      "steps": 152,
+      "reward_final": 1.0,
+      "wall_time": 127.90367340599914,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 35,
+      "success": true,
+      "coverage": 0.950660646144647,
+      "steps": 244,
+      "reward_final": 1.0,
+      "wall_time": 211.25212469899998,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 36,
+      "success": true,
+      "coverage": 0.9739127536778073,
+      "steps": 40,
+      "reward_final": 1.0,
+      "wall_time": 34.87564151499828,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 37,
+      "success": true,
+      "coverage": 0.9561972826629319,
+      "steps": 251,
+      "reward_final": 1.0,
+      "wall_time": 208.9581196399995,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 38,
+      "success": true,
+      "coverage": 0.9666825320230479,
+      "steps": 278,
+      "reward_final": 1.0,
+      "wall_time": 233.224015789001,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 39,
+      "success": true,
+      "coverage": 0.9733870874706847,
+      "steps": 188,
+      "reward_final": 1.0,
+      "wall_time": 157.53426351899907,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 40,
+      "success": true,
+      "coverage": 0.9523219021328136,
+      "steps": 101,
+      "reward_final": 1.0,
+      "wall_time": 79.45536698199794,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 41,
+      "success": true,
+      "coverage": 0.9681900767057593,
+      "steps": 141,
+      "reward_final": 1.0,
+      "wall_time": 116.42368723300024,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 42,
+      "success": true,
+      "coverage": 0.9815773219971073,
+      "steps": 173,
+      "reward_final": 1.0,
+      "wall_time": 147.95480733599834,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 43,
+      "success": true,
+      "coverage": 0.9552154137323247,
+      "steps": 155,
+      "reward_final": 1.0,
+      "wall_time": 126.62814851599978,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 44,
+      "success": true,
+      "coverage": 0.9538972757551202,
+      "steps": 109,
+      "reward_final": 1.0,
+      "wall_time": 90.80673609799851,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 45,
+      "success": true,
+      "coverage": 0.989582545791913,
+      "steps": 93,
+      "reward_final": 1.0,
+      "wall_time": 78.7289156179977,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 46,
+      "success": true,
+      "coverage": 0.952031110401493,
+      "steps": 274,
+      "reward_final": 1.0,
+      "wall_time": 214.9591534980027,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 47,
+      "success": true,
+      "coverage": 0.9574813501076873,
+      "steps": 55,
+      "reward_final": 1.0,
+      "wall_time": 45.21065951199853,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 48,
+      "success": true,
+      "coverage": 0.9669225775781743,
+      "steps": 130,
+      "reward_final": 1.0,
+      "wall_time": 113.37009441400005,
+      "video_path": null,
+      "trajectory_path": null
+    },
+    {
+      "seed": 49,
+      "success": true,
+      "coverage": 0.9535241061715349,
+      "steps": 187,
+      "reward_final": 1.0,
+      "wall_time": 143.136988086997,
+      "video_path": null,
+      "trajectory_path": null
+    }
+  ]
+}

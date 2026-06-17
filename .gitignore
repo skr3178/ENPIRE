@@ -1,0 +1,26 @@
+# --- Python env / caches ---
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.python-version
+
+# --- External clones (reproducible; not vendored) ---
+# gym-pusht: the immutable Push-T env. Re-create with:
+#   git clone https://github.com/huggingface/gym-pusht && uv pip install -e gym-pusht
+gym-pusht/
+# autoresearch: reference only. git clone https://github.com/karpathy/autoresearch
+reference_autoresearch/
+
+# --- Generated rollout artifacts (videos / trajectories) ---
+enpire_sim/reports/rollouts/
+*.npz
+
+# --- Heavy pulled assets (kept locally, too big for git) ---
+# Website reference clips + paper PDF. Lightweight reference (svg/json/recovered
+# code) IS tracked; the large media is not. Add Git LFS if you want them in-repo.
+pusht_components/*.mp4
+*.pdf
+
+# --- Scratch ---
+site.html

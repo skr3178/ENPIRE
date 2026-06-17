@@ -1,0 +1,41 @@
+<!doctype html><meta charset="utf-8">
+<title>Agents Improve Policies From Physical Feedback — Push-T rollouts</title>
+<style>
+ body{background:#0b0d10;color:#e8eaed;font:15px/1.5 system-ui,sans-serif;margin:0;padding:40px;display:flex;flex-direction:column;align-items:center}
+ h1{font-size:24px;font-weight:600;margin:0 0 4px}
+ .sub{color:#9aa0a6;margin:0 0 24px}
+ .tabs{display:flex;gap:8px;margin-bottom:16px}
+ .tab{background:#1a1d21;color:#cfd3d6;border:1px solid #2a2e33;border-radius:8px;padding:8px 16px;cursor:pointer;font:inherit}
+ .tab.on{background:#76b900;color:#0b0d10;border-color:#76b900;font-weight:600}
+ .meta{color:#9aa0a6;margin:12px 0;font-variant-numeric:tabular-nums}
+ svg{background:#101316;border:1px solid #23272c;border-radius:12px}
+ .grid{stroke:#1c2024} .goal path{fill:#76b90022;stroke:#76b900;stroke-width:3;vector-effect:non-scaling-stroke}
+ .trace{fill:none;stroke:#4aa3ff;stroke-width:3;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+ .block{fill:#ff9f43;stroke:#ff9f43}
+</style>
+<h1>Agents Improve Policies From Physical Feedback</h1>
+<p class="sub">Push-T heuristic-policy rollouts produced by three coding agents (ENPIRE, NVIDIA 2026).</p>
+<div class="tabs"><button class="tab" data-a="Codex">Codex</button><button class="tab" data-a="Claude Code">Claude Code</button><button class="tab" data-a="Kimi Code">Kimi Code</button></div>
+<svg width="480" height="480" viewBox="0 0 512 512">
+ <path class="grid" d="M 128 16 V 496 M 256 16 V 496 M 384 16 V 496 M 16 128 H 496 M 16 256 H 496 M 16 384 H 496" fill="none"/>
+ <g class="goal" transform="translate(256 256) rotate(45)"><path d="M -60 30 L 60 30 L 60 0 L -60 0 Z"/><path d="M -15 30 L -15 120 L 15 120 L 15 30 Z"/></g>
+ <path class="trace" data-a="Codex" d="M 149 244 L 155.185 243.948 L 161.885 243.891 L 165.895 243.858 L 167.974 243.84 L 168.994 243.832 L 179.6 249.953 L 190.789 256.586 L 248.042 291.185 L 306.281 326.417 L 340.771 347.286 L 358.585 358.064 L 367.311 363.345 L 371.487 365.872 L 373.464 367.068 L 374.395 367.632 L 374.833 367.897 L 375.038 368.021 L 375.134 368.079 L 375.179 368.106 L 375.201 368.119 L 375.21 368.125 L 336.571 286.136 L 294.718 197.334 L 269.662 144.172 L 256.673 116.613 L 250.3 103.091 L 241.984 107.206 L 234.837 115.609 L 204.424 173.986 L 173.828 234.221 L 155.745 269.984 L 146.412 288.471 L 141.842 297.53 L 139.655 301.867 L 138.619 303.92 L 138.132 304.887 L 137.903 305.341 L 137.795 305.554 L 137.745 305.654 L 137.721 305.701 L 137.71 305.723 L 137.705 305.734 L 158.362 313.58" style="display:none"/><path class="trace" data-a="Claude Code" d="M 149 244 L 129.25 251.856 L 111.616 210.211 L 102.007 196.165 L 134.418 184.292 L 148.446 152.184 L 130.044 133.307 L 168.521 163.672 L 187.035 173.018 L 186.51 167.769 L 175.259 189.618 L 181.203 215.446 L 170.44 233.416 L 175.701 233.873 L 175.426 229.985 L 203.889 227.913 L 208.478 221.38 L 150.157 201.91 L 147.446 233.346 L 173.359 298.983 L 175.605 310.323 L 154.983 297.325 L 173.73 262.698 L 210.342 218.841 L 231.225 211.885 L 230.95 183.928 L 220.28 209.831 L 219.45 282.997 L 200.813 313.555 L 205.732 330.65 L 246.35 326.175 L 322.343 296.58 L 334.171 263.345 L 348.714 299.7 L 404.273 287.487 L 432.014 277.397 L 406.458 247.688 L 406.5 194.908 L 422.989 157.754 L 408.427 162.746 L 366.306 167.929 L 378.847 200.013 L 403.978 218.379 L 390.73 183.794 L 356.364 180.333 L 355.291 185.914 L 333.653 186.495 L 316.694 150.315 L 353.398 189.884 L 360.995 231.835 L 291.56 226.752 L 265.385 228.497 L 285.76 239.684 L 294.645 256.922 L 297.456 269.483 L 303.761 276.485 L 313.31 300.071 L 328.734 341.355 L 343.168 330.84 L 313.102 334.074 L 285.702 343.785 L 286.345 337.098 L 272.607 340.249 L 292.831 346.358 L 261.657 326.39 L 267.897 350.928 L 276.636 381.497 L 256.602 357.08 L 244.78 382.995 L 214.755 402.868 L 200.233 381.216 L 201.825 359.453 L 235.295 335.85 L 233.614 321.237" style="display:none"/><path class="trace" data-a="Kimi Code" d="M 149 244 L 171.67 246.104 L 196.224 248.383 L 210.923 249.747 L 218.543 250.455 L 222.281 250.802 L 257.639 244.131 L 294.843 236.804 L 317.006 232.408 L 328.477 230.128 L 334.101 229.008 L 347.939 239.225 L 361.286 250.618 L 369.113 257.471 L 373.141 261.029 L 375.112 262.777 L 346.41 220.517 L 314.749 174.235 L 295.739 146.479 L 285.874 132.08 L 281.031 125.014 L 249.974 147.618 L 217.751 174.163 L 198.601 190.258 L 188.699 198.639 L 183.845 202.759 L 131.039 209.192 L 75.261 214.957 L 42.011 218.289 L 24.798 219.995 L 16.358 220.828 L 64.721 220.285 L 119.565 219.455 L 152.641 218.934 L 169.831 218.66 L 178.275 218.524 L 182.155 189.237 L 183.891 157.556 L 184.686 138.594 L 185.054 128.765 L 185.225 123.943 L 246.591 197.753 L 313.006 279.104 L 352.759 327.943 L 373.367 353.287 L 383.478 365.727 L 312.236 368.411 L 232.123 367.686 L 183.872 366.892 L 158.805 366.416 L 146.495 366.169 L 179.723 369.139 L 219.307 372.428 L 243.359 374.405 L 255.892 375.431 L 262.055 375.934 L 192.141 365.324 L 114.617 353.685 L 68.03 346.703 L 43.847 343.081 L 31.974 341.303 L 73.512 305.923 L 121.968 268.122 L 151.319 245.544 L 166.597 233.849 L 174.106 228.112 L 183.159 220.622" style="display:none"/>
+ <g class="block" transform="translate(240.223 210.674) rotate(79.33746589176509)"><rect x="-30" y="-15" width="60" height="15"/><rect x="-7.5" y="0" width="15" height="45"/></g>
+</svg>
+<p class="meta" id="meta"></p>
+<script>
+const META={"Codex": 43, "Claude Code": 73, "Kimi Code": 66};
+const tabs=[...document.querySelectorAll('.tab')], traces=[...document.querySelectorAll('.trace')], meta=document.getElementById('meta');
+let timer;
+function show(a){
+  tabs.forEach(t=>t.classList.toggle('on',t.dataset.a===a));
+  traces.forEach(p=>p.style.display=p.dataset.a===a?'':'none');
+  const path=traces.find(p=>p.dataset.a===a), len=path.getTotalLength();
+  path.style.transition='none'; path.style.strokeDasharray=len; path.style.strokeDashoffset=len;
+  path.getBoundingClientRect();
+  path.style.transition='stroke-dashoffset 3s linear'; path.style.strokeDashoffset=0;
+  meta.textContent=`${a} — ${META[a]} steps`;
+}
+tabs.forEach(t=>t.onclick=()=>show(t.dataset.a));
+show('Codex');
+</script>

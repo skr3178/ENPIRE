@@ -24,3 +24,6 @@ pusht_components/*.mp4
 
 # --- Scratch ---
 site.html
+
+# Stage 2 fleet worktrees (sibling dir, auto-created)
+.worktrees/

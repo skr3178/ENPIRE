@@ -46,6 +46,19 @@ def collect(logs: List[str]) -> List[dict]:
     return rows
 
 
+def load_merges() -> List[dict]:
+    """Cross-agent recipe-sharing events logged by enpire_sim.agents.evolution."""
+    path = os.path.join(REPO, "enpire_sim", "reports", "merges.jsonl")
+    out = []
+    if os.path.exists(path):
+        for line in open(path):
+            try:
+                out.append(json.loads(line))
+            except ValueError:
+                continue
+    return out
+
+
 def figure1(rows: List[dict], out: str, time_unit: str = "min") -> Optional[str]:
     if not rows:
         print("no iterations logged yet; nothing to plot")
@@ -90,6 +103,18 @@ def figure1(rows: List[dict], out: str, time_unit: str = "min") -> Optional[str]
         if ring:
             ax_tree.scatter([t], [li], s=90, facecolors="none",
                             edgecolors=green, linewidths=1.8, zorder=4)
+
+    # cross-agent inspiration curves (evolution merges): from source lane -> target lane
+    import matplotlib.patches as mpatches
+    for m in load_merges():
+        src, dst = m.get("from"), m.get("to")
+        if src in lane_idx and dst in lane_idx:
+            x = (m["ts"] - t0) / div
+            arc = mpatches.FancyArrowPatch(
+                (x, lane_idx[src]), (x, lane_idx[dst]),
+                connectionstyle="arc3,rad=0.35", color=green, lw=1.2,
+                alpha=0.7, arrowstyle="-|>", mutation_scale=10, zorder=2)
+            ax_tree.add_patch(arc)
     ax_tree.set_yticks(range(len(lanes)))
     ax_tree.set_yticklabels([b.split("/")[-1] for b in lanes], fontsize=8)
     ax_tree.set_ylabel("idea lanes (one per agent)")

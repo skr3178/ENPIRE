@@ -48,9 +48,9 @@ class Policy:
         dist = np.linalg.norm(to_goal)
         direction = to_goal / dist if dist > 1e-6 else np.array([1.0, 0.0])
 
-        behind = block - direction * 35.0  # staging point on the far side from goal
-        if np.linalg.norm(agent - behind) > 15.0:
+        behind = block - direction * 30.0  # staging point on the far side from goal
+        if np.linalg.norm(agent - behind) > 12.0:
             target = behind                 # phase 1: get into pushing position
         else:
-            target = block + direction * 40.0  # phase 2: push through toward goal
+            target = block + direction * 30.0  # phase 2: push through toward goal
         return np.clip(target, 0.0, 512.0).astype(np.float32)

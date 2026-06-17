@@ -27,6 +27,8 @@ from enpire_sim.rollout.runner import RolloutConfig, evaluate
 
 LOG_JSONL = "enpire_sim/reports/iteration_log.jsonl"
 LOG_TSV = "enpire_sim/reports/results.tsv"
+POLICY = "enpire_sim/policies/policy.py"
+ADOPT_MARGIN = 0.10  # adopt a peer only if it beats your branch-best by >= this
 
 
 def _git(*args: str) -> str:
@@ -34,6 +36,20 @@ def _git(*args: str) -> str:
         return subprocess.check_output(["git", *args], text=True).strip()
     except Exception:
         return ""
+
+
+def shared_dir() -> str:
+    """The cross-worktree shared state dir (ENPIRE-fleet/shared), resolved from the
+    common .git so it is identical from any worktree or the main repo."""
+    common = _git("rev-parse", "--git-common-dir")          # <main-repo>/.git
+    main_repo = os.path.dirname(os.path.abspath(common)) if common else os.getcwd()
+    d = os.path.normpath(os.path.join(main_repo, "..", "ENPIRE-fleet", "shared"))
+    os.makedirs(d, exist_ok=True)
+    return d
+
+
+def _shared(path: str) -> str:
+    return os.path.join(shared_dir(), path)
 
 
 def git_head() -> str:
@@ -101,12 +117,73 @@ def cmd_eval(args: argparse.Namespace) -> None:
     }
     _append_jsonl(row)
     _append_tsv(row)
+    # Publish this station's best to the shared leaderboard so peers can see it (E module).
+    best_so_far = max(prev_best, summary["success_rate"])
+    with open(_shared("leaderboard.jsonl"), "a") as f:
+        f.write(json.dumps({"ts": time.time(), "branch": branch, "commit": git_head(),
+                            "success_rate": best_so_far,
+                            "mean_coverage": summary["mean_coverage"]}) + "\n")
 
     sr = summary["success_rate"]
     improved = sr > prev_best
     print(f"success_rate={sr*100:.1f}%  mean_cov={summary['mean_coverage']:.3f}  "
           f"({summary['n_success']}/{summary['n_episodes']})  eval={elapsed:.0f}s")
     print(f"prev_best_on_branch={prev_best*100:.1f}%  -> {'IMPROVED (keep)' if improved else 'NOT IMPROVED (revert)'}")
+
+
+def _leaderboard_latest() -> dict:
+    """Latest best-per-branch from the shared leaderboard: {branch: (sr, commit, cov)}."""
+    path = _shared("leaderboard.jsonl")
+    out: dict = {}
+    if os.path.exists(path):
+        for line in open(path):
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            b = r.get("branch")
+            sr = float(r.get("success_rate", 0.0))
+            if b and (b not in out or sr >= out[b][0]):
+                out[b] = (sr, r.get("commit", "?"), float(r.get("mean_coverage", 0.0)))
+    return out
+
+
+def cmd_peek(args: argparse.Namespace) -> None:
+    """Show peers' best vs your own; flag any peer worth adopting (E module)."""
+    me = git_branch()
+    board = _leaderboard_latest()
+    my_best = board.get(me, (branch_best(me), "?", 0.0))[0]
+    print(f"you are [{me}], branch-best success={my_best*100:.1f}%")
+    print("peers (shared leaderboard):")
+    peers = sorted(((b, v) for b, v in board.items() if b != me), key=lambda x: -x[1][0])
+    if not peers:
+        print("  (no peers have published yet)")
+    for b, (sr, commit, cov) in peers:
+        flag = "  <-- ADOPT-WORTHY (>=10pp ahead)" if sr >= my_best + ADOPT_MARGIN else ""
+        print(f"  {b:<26} best={sr*100:5.1f}%  cov={cov:.2f}  ({commit}){flag}")
+    print(f"\nIf a peer is ADOPT-WORTHY and you have stalled, run:\n"
+          f"  python -m enpire_sim.agents.coding_agent adopt --from <peer-branch>")
+
+
+def cmd_adopt(args: argparse.Namespace) -> None:
+    """Pull a peer's committed policy.py into this branch and commit it (E module)."""
+    src = args.from_branch
+    me = git_branch()
+    policy_src = _git("show", f"{src}:{POLICY}")
+    if not policy_src:
+        print(f"could not read {src}:{POLICY} (peer branch/policy not found)")
+        return
+    with open(POLICY, "w") as f:
+        f.write(policy_src + ("\n" if not policy_src.endswith("\n") else ""))
+    subprocess.run(["git", "add", POLICY], check=False)
+    subprocess.run(["git", "-c", "user.name=enpire-agent", "-c", "user.email=a@enpire",
+                    "commit", "-q", "-m", f"merge: adopt recipe from {src}"], check=False)
+    board = _leaderboard_latest()
+    sr = board.get(src, (0.0,))[0]
+    with open(_shared("merges.jsonl"), "a") as f:
+        f.write(json.dumps({"ts": time.time(), "from": src, "to": me, "sr": sr}) + "\n")
+    print(f"adopted {src}'s policy ({sr*100:.0f}%) into [{me}] and logged the merge. "
+          f"Now eval it, then IMPROVE on it with your lane's own strength.")
 
 
 def main() -> None:
@@ -119,6 +196,14 @@ def main() -> None:
     ev.add_argument("--max-steps", type=int, default=300)
     ev.add_argument("--desc", default="", help="one-line description of this experiment")
     ev.set_defaults(func=cmd_eval)
+
+    pk = sub.add_parser("peek", help="see peers' best on the shared leaderboard (E module)")
+    pk.set_defaults(func=cmd_peek)
+
+    ad = sub.add_parser("adopt", help="adopt a peer's policy.py into your branch (E module)")
+    ad.add_argument("--from", dest="from_branch", required=True, help="peer branch, e.g. autoresearch/run-w3")
+    ad.set_defaults(func=cmd_adopt)
+
     args = p.parse_args()
     args.func(args)
 

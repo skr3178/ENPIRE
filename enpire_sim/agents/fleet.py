@@ -27,7 +27,9 @@ from typing import List
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 FLEET_DIR = os.path.normpath(os.path.join(REPO, "..", "ENPIRE-fleet"))
-BASE_BRANCH = "enpire/baseline"
+# Leakage-safe baseline: recovered Codex/Claude/Kimi policies are stripped from this
+# branch, so fleet worktrees physically cannot read them.
+BASE_BRANCH = "enpire/baseline-clean"
 BRANCH_PREFIX = "autoresearch/run-w"
 MANIFEST = os.path.join(REPO, "enpire_sim", "reports", "fleet.json")
 
@@ -49,9 +51,20 @@ def _existing_branches() -> set:
     return set(out.splitlines())
 
 
+def shared_dir() -> str:
+    """Cross-worktree shared state dir (ENPIRE-fleet/shared) for the E module."""
+    d = os.path.join(FLEET_DIR, "shared")
+    os.makedirs(d, exist_ok=True)
+    return d
+
+
 def setup(n: int, base: str = BASE_BRANCH) -> List[Station]:
     """Create n worktrees (each a fresh branch off `base`)."""
     os.makedirs(FLEET_DIR, exist_ok=True)
+    # Fresh shared leaderboard + merges log for this run (E-module collaboration state).
+    sd = shared_dir()
+    for fn in ("leaderboard.jsonl", "merges.jsonl"):
+        open(os.path.join(sd, fn), "w").close()
     venv_python = os.path.join(REPO, ".venv", "bin", "python")
     branches = _existing_branches()
     stations: List[Station] = []

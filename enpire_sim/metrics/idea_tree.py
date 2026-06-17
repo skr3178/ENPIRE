@@ -47,15 +47,21 @@ def collect(logs: List[str]) -> List[dict]:
 
 
 def load_merges() -> List[dict]:
-    """Cross-agent recipe-sharing events logged by enpire_sim.agents.evolution."""
-    path = os.path.join(REPO, "enpire_sim", "reports", "merges.jsonl")
+    """Cross-agent recipe-sharing events. Agent-driven adoptions are logged to the
+    shared fleet dir (ENPIRE-fleet/shared/merges.jsonl); the orchestrator-driven
+    evolution.share log (REPO/enpire_sim/reports/merges.jsonl) is read as a fallback."""
+    paths = [
+        os.path.join(FLEET_DIR, "shared", "merges.jsonl"),   # agent-driven (peek/adopt)
+        os.path.join(REPO, "enpire_sim", "reports", "merges.jsonl"),  # orchestrator-driven
+    ]
     out = []
-    if os.path.exists(path):
-        for line in open(path):
-            try:
-                out.append(json.loads(line))
-            except ValueError:
-                continue
+    for path in paths:
+        if os.path.exists(path):
+            for line in open(path):
+                try:
+                    out.append(json.loads(line))
+                except ValueError:
+                    continue
     return out
 
 

@@ -10,8 +10,8 @@ UC Berkeley, 2026). See [`PLAN.md`](PLAN.md) for the full build plan and stage m
 
 ## Status
 
-The full pipeline (EN → PI → R → E + reproduction plots) is **built, wired, and tested
-end-to-end**. No coding-agent runs have been kept yet — the harness is ready to launch.
+The full pipeline (EN → PI → R → E + reproduction plots) is **built, tested, and run
+end-to-end with real coding agents** (see [Results](#results) below).
 
 - **Stage 0 (EN + R) — done.** Env interface, parallel rollout/eval, video+results
   logging. Recovered CEM baseline validated at **96% success (48/50)** over 50 episodes.
@@ -26,6 +26,38 @@ end-to-end**. No coding-agent runs have been kept yet — the harness is ready t
 The coding agents are launched by a Claude Code session spawning one subagent per station
 (homogeneous Claude fleet; Codex backend available but deferred to the cross-agent
 comparison).
+
+## Results
+
+Real runs of the fleet (4 Claude coding agents, leakage-safe worktrees, writing Push-T
+policies from scratch). The figures are `metrics/idea_tree.py` output: **idea tree on top**
+(one lane per agent, dots = ideas tried, green ring = raised team best, green arrows =
+cross-agent recipe adoptions) and **team hillclimb on the bottom** (best success vs
+research wall-clock).
+
+**Collaborative run** — agents `peek` at a shared leaderboard and `adopt` a peer's recipe
+when stalled. 6 adoptions; the winning CEM-MPC recipe spreads across lanes.
+
+![Collaborative fleet — idea tree + hillclimb](docs/figure1_collaborative.png)
+
+**Isolated run** (no collaboration) — 4 independent lanes, **no cross-agent arrows**, lower
+team climb. Shown for contrast: collaboration is what produces the branching structure.
+
+![Isolated fleet — independent lanes](docs/figure1_isolated.png)
+
+| Run | Cross-agent adoptions | Team-avg best (12-seed) | Best validated (held-out) |
+|---|---|---|---|
+| Isolated  | 0 | 14.6% | 20% |
+| Collaborative | 6 | 72.9% | **~50%** |
+
+**Honesty note — the gap between the two right columns is the headline finding.** The
+12-seed leaderboard numbers (used live by the agents) are **gameable**: the eval reused a
+fixed seed set, so agents overfit to it — one lane hit "92%" on the 12 search seeds but only
+**50%** on held-out seeds. So the *plots are real data*, but the success values on them are the
+optimistic fixed-seed metric; the honest, held-out performance plateaus around **50%**, and
+**no lane crossed the 0.95 success bar**. The recovered reference CEM policy (`--policy cem`,
+not given to the agents) reaches **96%**, so a high-success policy exists — the from-scratch
+agents reproduced the *pipeline and the collaboration dynamic*, not (yet) a solved task.
 
 ## Setup
 

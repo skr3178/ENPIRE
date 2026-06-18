@@ -110,17 +110,27 @@ def figure1(rows: List[dict], out: str, time_unit: str = "min") -> Optional[str]
             ax_tree.scatter([t], [li], s=90, facecolors="none",
                             edgecolors=green, linewidths=1.8, zorder=4)
 
-    # cross-agent inspiration curves (evolution merges): from source lane -> target lane
+    # cross-agent inspiration curves (adoptions): arrow from the SOURCE idea node that was
+    # adopted (the source lane's best node at/before the merge) -> the adoption point on the
+    # target lane (at the merge time). This references the actual recipe, not just the lanes.
     import matplotlib.patches as mpatches
     for m in load_merges():
         src, dst = m.get("from"), m.get("to")
-        if src in lane_idx and dst in lane_idx:
-            x = (m["ts"] - t0) / div
-            arc = mpatches.FancyArrowPatch(
-                (x, lane_idx[src]), (x, lane_idx[dst]),
-                connectionstyle="arc3,rad=0.35", color=green, lw=1.2,
-                alpha=0.7, arrowstyle="-|>", mutation_scale=10, zorder=2)
-            ax_tree.add_patch(arc)
+        if src not in lane_idx or dst not in lane_idx:
+            continue
+        merge_x = (m["ts"] - t0) / div
+        si, di = lane_idx[src], lane_idx[dst]
+        # the adopted recipe = the source lane's highest-success node at/before the merge
+        src_nodes = [(t, sr) for (t, li, sr, _) in nodes if li == si and t <= merge_x + 1e-9]
+        src_x = max(src_nodes, key=lambda x: (x[1], x[0]))[0] if src_nodes else merge_x
+        arc = mpatches.FancyArrowPatch(
+            (src_x, si), (merge_x, di),
+            connectionstyle="arc3,rad=0.25", color=green, lw=1.5,
+            alpha=0.85, arrowstyle="-|>", mutation_scale=13, zorder=2)
+        ax_tree.add_patch(arc)
+        # mark the source recipe node so the reference is unambiguous
+        ax_tree.scatter([src_x], [si], s=70, facecolors="none",
+                        edgecolors=green, linewidths=1.2, linestyle=":", zorder=4)
     ax_tree.set_yticks(range(len(lanes)))
     ax_tree.set_yticklabels([b.split("/")[-1] for b in lanes], fontsize=8)
     ax_tree.set_ylabel("idea lanes (one per agent)")

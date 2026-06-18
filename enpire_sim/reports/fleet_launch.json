@@ -1,0 +1,34 @@
+[
+  {
+    "idx": 0,
+    "path": "/media/skr/storage/paper_reproduction/ENPIRE-fleet/w0",
+    "branch": "autoresearch/run-w0",
+    "venv_python": "/media/skr/storage/paper_reproduction/ENPIRE/.venv/bin/python",
+    "hypothesis": "two-phase reactive",
+    "hint": "Phase ROTATE: push tangentially on a bar-tip to spin the T toward goal angle. Phase TRANSLATE: when aligned, push through the centre of mass toward (256,256)."
+  },
+  {
+    "idx": 1,
+    "path": "/media/skr/storage/paper_reproduction/ENPIRE-fleet/w1",
+    "branch": "autoresearch/run-w1",
+    "venv_python": "/media/skr/storage/paper_reproduction/ENPIRE/.venv/bin/python",
+    "hypothesis": "greedy contact selection",
+    "hint": "Each step, enumerate candidate contacts around the T + a push direction; score by reduction in pos_error + k*angle_error; execute the best (1-step greedy)."
+  },
+  {
+    "idx": 2,
+    "path": "/media/skr/storage/paper_reproduction/ENPIRE-fleet/w2",
+    "branch": "autoresearch/run-w2",
+    "venv_python": "/media/skr/storage/paper_reproduction/ENPIRE/.venv/bin/python",
+    "hypothesis": "short internal-sim lookahead",
+    "hint": "Private sim synced via compensated_reset_state; try <=8 candidate targets over <=3 step rollouts; pick lowest block-pose cost. Keep it fast."
+  },
+  {
+    "idx": 3,
+    "path": "/media/skr/storage/paper_reproduction/ENPIRE-fleet/w3",
+    "branch": "autoresearch/run-w3",
+    "venv_python": "/media/skr/storage/paper_reproduction/ENPIRE/.venv/bin/python",
+    "hypothesis": "angle-priority PD",
+    "hint": "Smooth proportional law gated on orientation: correct angle first (offset torque push), then drive position proportionally to goal. Tune gains + switch threshold."
+  }
+]

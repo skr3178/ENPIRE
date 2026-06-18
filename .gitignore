@@ -12,8 +12,15 @@ gym-pusht/
 # autoresearch: reference only. git clone https://github.com/karpathy/autoresearch
 reference_autoresearch/
 
-# --- Generated rollout artifacts (videos / trajectories) ---
-enpire_sim/reports/
+# --- Generated reports ---
+# Track lightweight, durable result artifacts (figures, iteration/merge logs, summaries);
+# ignore heavy media (rollout videos/trajectories) and per-run scratch (_*.log).
+# NOTE: .gitignore has no inline comments — keep patterns on their own lines.
+enpire_sim/reports/rollouts/
+enpire_sim/reports/*.mp4
+enpire_sim/reports/*.gif
+enpire_sim/reports/_*
+enpire_sim/reports/continue_prompt.txt
 *.npz
 
 # --- Heavy pulled assets (kept locally, too big for git) ---

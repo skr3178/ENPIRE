@@ -1,0 +1,26 @@
+[
+  {
+    "idx": 0,
+    "path": "/media/skr/storage/paper_reproduction/ENPIRE-fleet/w0",
+    "branch": "autoresearch/run-w0",
+    "venv_python": "/media/skr/storage/paper_reproduction/ENPIRE/.venv/bin/python"
+  },
+  {
+    "idx": 1,
+    "path": "/media/skr/storage/paper_reproduction/ENPIRE-fleet/w1",
+    "branch": "autoresearch/run-w1",
+    "venv_python": "/media/skr/storage/paper_reproduction/ENPIRE/.venv/bin/python"
+  },
+  {
+    "idx": 2,
+    "path": "/media/skr/storage/paper_reproduction/ENPIRE-fleet/w2",
+    "branch": "autoresearch/run-w2",
+    "venv_python": "/media/skr/storage/paper_reproduction/ENPIRE/.venv/bin/python"
+  },
+  {
+    "idx": 3,
+    "path": "/media/skr/storage/paper_reproduction/ENPIRE-fleet/w3",
+    "branch": "autoresearch/run-w3",
+    "venv_python": "/media/skr/storage/paper_reproduction/ENPIRE/.venv/bin/python"
+  }
+]

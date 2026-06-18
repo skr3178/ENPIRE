@@ -1,0 +1,61 @@
+{
+  "policy": "policy",
+  "n_episodes": 5,
+  "n_success": 0,
+  "success_rate": 0.0,
+  "mean_coverage": 0.0,
+  "mean_steps": 300.0,
+  "total_wall_time": 2.754411706006067,
+  "episodes": [
+    {
+      "seed": 0,
+      "success": false,
+      "coverage": 0.0,
+      "steps": 300,
+      "reward_final": 0.0,
+      "wall_time": 0.5424697270027536,
+      "video_path": "enpire_sim/reports/rollouts/policy_seed000_failure.mp4",
+      "trajectory_path": null
+    },
+    {
+      "seed": 1,
+      "success": false,
+      "coverage": 0.0,
+      "steps": 300,
+      "reward_final": 0.0,
+      "wall_time": 0.5370650340009888,
+      "video_path": "enpire_sim/reports/rollouts/policy_seed001_failure.mp4",
+      "trajectory_path": null
+    },
+    {
+      "seed": 2,
+      "success": false,
+      "coverage": 0.0,
+      "steps": 300,
+      "reward_final": 0.0,
+      "wall_time": 0.6144830390003335,
+      "video_path": "enpire_sim/reports/rollouts/policy_seed002_failure.mp4",
+      "trajectory_path": null
+    },
+    {
+      "seed": 3,
+      "success": false,
+      "coverage": 0.0,
+      "steps": 300,
+      "reward_final": 0.0,
+      "wall_time": 0.5604139960014436,
+      "video_path": "enpire_sim/reports/rollouts/policy_seed003_failure.mp4",
+      "trajectory_path": null
+    },
+    {
+      "seed": 4,
+      "success": false,
+      "coverage": 0.0,
+      "steps": 300,
+      "reward_final": 0.0,
+      "wall_time": 0.49997991000054753,
+      "video_path": "enpire_sim/reports/rollouts/policy_seed004_failure.mp4",
+      "trajectory_path": null
+    }
+  ]
+}

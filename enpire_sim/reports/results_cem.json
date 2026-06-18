@@ -1,0 +1,21 @@
+{
+  "policy": "cem",
+  "n_episodes": 1,
+  "n_success": 1,
+  "success_rate": 1.0,
+  "mean_coverage": 0.9699946458220137,
+  "mean_steps": 79.0,
+  "total_wall_time": 59.856144399000186,
+  "episodes": [
+    {
+      "seed": 0,
+      "success": true,
+      "coverage": 0.9699946458220137,
+      "steps": 79,
+      "reward_final": 1.0,
+      "wall_time": 59.856144399000186,
+      "video_path": "enpire_sim/reports/rollouts/cem_seed000_success.mp4",
+      "trajectory_path": null
+    }
+  ]
+}
